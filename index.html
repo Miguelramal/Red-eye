@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>redeyes</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Eye Test</title>
+    <style>
+        /* Estilo básico: Sin márgenes ni padding */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Evita el scroll */
+        }
+
+        .image-container {
+            display: flex;
+            align-items: flex-start; /* Alinea las imágenes al borde superior */
+            white-space: nowrap; /* Fuerza el contenido a estar en una sola línea */
+        }
+
+        img {
+            margin: 0; /* Elimina cualquier espacio entre imágenes */
+            padding: 0; /* Elimina relleno adicional */
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal -->
+    <div id="container" class="image-container"></div>
+
+    <script>
+        // URL de la imagen
+        const imageUrl = 'https://raw.githubusercontent.com/miguelramal/Red-eye/main/REDEYE.jpg';
+
+        // Tamaño inicial de las imágenes
+        let initialWidth = 700;
+        let initialHeight = 700;
+
+        // Función para agregar una nueva imagen
+        function addImage() {
+            const container = document.getElementById('container');
+            const images = container.querySelectorAll('img');
+
+            // Crear una nueva imagen
+            const newImage = document.createElement('img');
+            newImage.src = imageUrl;
+            newImage.style.width = `${initialWidth}px`;
+            newImage.style.height = `${initialHeight}px`;
+
+            // Agregar evento de click a la nueva imagen
+            newImage.addEventListener('click', addImage);
+
+            // Insertar la nueva imagen al final
+            container.appendChild(newImage);
+
+            // Reducir el tamaño de las imágenes anteriores un 10%
+            Array.from(images).forEach((img, index) => {
+                const newWidth = parseFloat(img.style.width) * 0.9;
+                const newHeight = parseFloat(img.style.height) * 0.9;
+                img.style.width = `${newWidth}px`;
+                img.style.height = `${newHeight}px`;
+            });
+
+            // Ajustar el tamaño total al ancho de la ventana
+            adjustImagesToFit(container);
+        }
+
+        // Ajustar las imágenes para que ocupen el ancho de la ventana
+        function adjustImagesToFit(container) {
+            const images = container.querySelectorAll('img');
+            let totalWidth = Array.from(images).reduce((acc, img) => acc + img.offsetWidth, 0);
+
+            if (totalWidth > window.innerWidth) {
+                const scaleFactor = window.innerWidth / totalWidth;
+                images.forEach(img => {
+                    img.style.width = `${img.offsetWidth * scaleFactor}px`;
+                    img.style.height = `${img.offsetHeight * scaleFactor}px`;
+                });
+            }
+        }
+
+        // Agregar la primera imagen al cargar la página
+        window.onload = addImage;
+    </script>
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
