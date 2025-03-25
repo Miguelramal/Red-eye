@@ -23,7 +23,7 @@
             padding: 16px; /* Padding de 16px en todos los lados */
             z-index: 1000; /* Mayor valor para asegurar que esté por encima */
             font-size: 14px; /* Tamaño de fuente */
-            line-height: 1.2;
+            line-height: 1.3;
             box-sizing: border-box; /* Incluye el padding en el tamaño total */
             mix-blend-mode: difference; /* Aplica el efecto de fusión "difference" */
         }
@@ -42,17 +42,32 @@
             padding: 0; /* Elimina relleno adicional */
             transition: width 0.5s ease, height 0.5s ease;
         }
+
+        /* Estilo para el contador */
+        .counter {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            padding: 16px;
+            font-size: 14px;
+            color: white;
+            mix-blend-mode: difference;
+            z-index: 1000; /* Asegura que el contador esté por encima de las imágenes */
+        }
     </style>
 </head>
 <body>
 
     <!-- Encabezado con el texto superior -->
     <header>
-        El uso de ratas de laboratorio en experimentos científicos es un fenómeno a escala mundial, y las cifras que reflejan su empleo son asombrosamente grandes. Según estimaciones basadas en diversos informes sobre el uso de animales en investigación, en 2013 se utilizaron alrededor de 663,000 ratones solo en España. A nivel mundial, se estima que en países como Estados Unidos, aproximadamente el 95% de los 25 millones de animales utilizados anualmente en experimentación son roedores, lo que representa unos 23,750,000 ratones al año solo en este país. A partir de estos datos, calculamos que en promedio se utilizan 654,496 ratones por día en todo el mundo.<br>Cada vez que haces click, aparece una nueva imagen en pantalla. Para alcanzar la cantidad de roedores destinados a la ciencia, deberías pulsar 7 veces por segundo. Este ejercicio muestra la dimensión abrumadora de la cantidad de ratones que se utilizan diariamente en el ámbito de la experimentación científica.
+        The use of laboratory rats in scientific experiments is a global phenomenon, and the figures reflecting their use are astonishingly large. According to estimates based on various reports on animal use in research, around 663,000 mice were used in Spain alone in 2013. Worldwide, it is estimated that in countries like the United States, approximately 95% of the 25 million animals used annually in experiments are rodents, which represents about 23,750,000 mice per year in this country alone. Based on these figures, we calculate that, on average, 654,496 mice are used per day worldwide.<br>Every time you click, a new image appears on the screen. To reach the number of rodents used in science, you would need to click 7 times per second. This exercise highlights the overwhelming scale of the number of mice used daily in scientific experimentation.
     </header>
 
     <!-- Contenedor principal -->
     <div id="container" class="image-container"></div>
+
+    <!-- Contador en la esquina inferior izquierda -->
+    <div class="counter" id="counter">0</div>
 
     <script>
         // URL de la imagen
@@ -61,6 +76,9 @@
         // Tamaño inicial de las imágenes
         let initialWidth = 700;
         let initialHeight = 700;
+
+        // Inicializamos el contador
+        let clickCount = 0;
 
         // Función para agregar una nueva imagen
         function addImage() {
@@ -89,6 +107,9 @@
 
             // Ajustar el tamaño total al ancho de la ventana
             adjustImagesToFit(container);
+
+            // Incrementar el contador
+            updateCounter();
         }
 
         // Ajustar las imágenes para que ocupen el ancho de la ventana
@@ -105,8 +126,17 @@
             }
         }
 
+        // Actualizar el contador en la pantalla
+        function updateCounter() {
+            clickCount += 1;
+            document.getElementById('counter').textContent = clickCount;
+        }
+
         // Agregar la primera imagen al cargar la página
         window.onload = addImage;
+
+        // Agregar un listener para el click en toda la página
+        document.body.addEventListener('click', addImage);
     </script>
 
 </body>
