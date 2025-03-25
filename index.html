@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>redeyes</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -20,12 +10,31 @@
             margin: 0;
             padding: 0;
             overflow: hidden; /* Evita el scroll */
+            background-color: white; /* Fondo blanco para contraste */
+            color: white; /* Texto blanco */
+            font-family: 'Times New Roman', serif; /* Tipografía */
+        }
+
+        header {
+            position: fixed; /* Fijo para que se mantenga sobre las imágenes */
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px; /* Padding de 16px en todos los lados */
+            z-index: 1000; /* Mayor valor para asegurar que esté por encima */
+            font-size: 14px; /* Tamaño de fuente */
+            line-height: 1.2;
+            box-sizing: border-box; /* Incluye el padding en el tamaño total */
+            mix-blend-mode: difference; /* Aplica el efecto de fusión "difference" */
         }
 
         .image-container {
             display: flex;
             align-items: flex-start; /* Alinea las imágenes al borde superior */
             white-space: nowrap; /* Fuerza el contenido a estar en una sola línea */
+            position: absolute;
+            top: 0; /* Eliminar el empuje hacia abajo */
+            z-index: 1; /* Asegura que las imágenes estén debajo del header */
         }
 
         img {
@@ -36,6 +45,11 @@
     </style>
 </head>
 <body>
+
+    <!-- Encabezado con el texto superior -->
+    <header>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Suspendisse potenti. Integer nec lorem libero. Curabitur vel erat et justo viverra volutpat. Ut tempus purus a arcu facilisis, eget luctus sapien varius. Vestibulum id justo id justo maximus hendrerit a sed neque. Praesent accumsan mauris ut elit bibendum consectetur. Donec porttitor libero a enim tincidunt, a vulputate metus consequat. Fusce fringilla massa id lectus vulputate, sit amet tincidunt dolor convallis. In tincidunt tempor metus, non venenatis justo vehicula non. Integer rhoncus metus ut purus tincidunt, vel consequat sapien pharetra. Etiam nec massa quis ligula scelerisque tincidunt. Sed nec purus et nulla vestibulum ullamcorper. Nam aliquet ullamcorper sapien, in tempor metus pharetra in.
+    </header>
 
     <!-- Contenedor principal -->
     <div id="container" class="image-container"></div>
@@ -95,9 +109,5 @@
         window.onload = addImage;
     </script>
 
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
