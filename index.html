@@ -22,7 +22,7 @@
             right: 0;
             padding: 16px; /* Padding de 16px en todos los lados */
             z-index: 1000; /* Mayor valor para asegurar que esté por encima */
-            font-size: 14px; /* Tamaño de fuente */
+            font-size: 16px; /* Tamaño de fuente */
             line-height: 1.3;
             box-sizing: border-box; /* Incluye el padding en el tamaño total */
             mix-blend-mode: difference; /* Aplica el efecto de fusión "difference" */
@@ -48,11 +48,19 @@
             position: fixed;
             bottom: 16px;
             left: 16px;
-            padding: 16px;
-            font-size: 14px;
+            padding: 0px;
+            font-size: 16px;
             color: white;
             mix-blend-mode: difference;
             z-index: 1000; /* Asegura que el contador esté por encima de las imágenes */
+        }
+
+        /* Comportamiento para dispositivos móviles */
+        @media (max-width: 768px) {
+            .image-container {
+                flex-direction: column; /* Cambia a disposición vertical */
+                white-space: normal; /* Permite el ajuste de línea */
+            }
         }
     </style>
 </head>
@@ -60,7 +68,7 @@
 
     <!-- Encabezado con el texto superior -->
     <header>
-        The use of laboratory rats in scientific experiments is a global phenomenon, and the figures reflecting their use are astonishingly large. According to estimates based on various reports on animal use in research, around 663,000 mice were used in Spain alone in 2013. Worldwide, it is estimated that in countries like the United States, approximately 95% of the 25 million animals used annually in experiments are rodents, which represents about 23,750,000 mice per year in this country alone. Based on these figures, we calculate that, on average, 654,496 mice are used per day worldwide.<br> <br>Every time you click, a new image appears on the screen. To reach the number of rodents used in science, you would need to click 7 times per second. This exercise highlights the overwhelming scale of the number of mice used daily in scientific experimentation.
+        The use of laboratory rats in scientific experiments is a global phenomenon, and the figures reflecting their use are astonishingly large. According to estimates based on various reports on animal use in research, around 663,000 mice were used in Spain alone in 2013. Worldwide, it is estimated that in countries like the United States, approximately 95% of the 25 million animals used annually in experiments are rodents, which represents about 23,750,000 mice per year in this country alone. Based on these figures, we calculate that, on average, 654,496 mice are used per day worldwide. Every time you click, a new image appears on the screen. To reach the number of rodents used in science, you would need to click 7 times per second. This exercise highlights the overwhelming scale of the number of mice used daily in scientific experimentation.
     </header>
 
     <!-- Contenedor principal -->
@@ -90,9 +98,6 @@
             newImage.src = imageUrl;
             newImage.style.width = `${initialWidth}px`;
             newImage.style.height = `${initialHeight}px`;
-
-            // Agregar evento de click a la nueva imagen
-            newImage.addEventListener('click', addImage);
 
             // Insertar la nueva imagen al final
             container.appendChild(newImage);
@@ -136,7 +141,11 @@
         window.onload = addImage;
 
         // Agregar un listener para el click en toda la página
-        document.body.addEventListener('click', addImage);
+        document.body.addEventListener('click', (event) => {
+            if (!event.target.closest('.counter')) {
+                addImage();
+            }
+        });
     </script>
 
 </body>
